@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BallShooter : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject Ball;
+    public Text ReloadText;
+
+    public int reloadTime = 10;
     public string hitMode;
 
     [Range(-90, 90)]
@@ -18,31 +22,34 @@ public class BallShooter : MonoBehaviour
 
     void Start()
     {
+        ReloadText.text = $"{reloadTime}";
         if (hitMode == "Smash" || hitMode == "smash")
         {
             ReadySmash();
         }
     }
 
-
     // Update is called once per frame
     float timeCount = 0;
     void Update()
     {
         timeCount += Time.deltaTime;
-        if (timeCount > 10)
+        if (timeCount > reloadTime)
         {
             Smash();
             timeCount = 0;
         }
-        else if (timeCount > 8)
+        else if (timeCount > reloadTime - 3)
         {
-            ReadySmash();
+            ReloadSmash();
         }
+        ReloadText.text = $"{reloadTime - (int)timeCount}";
+
     }
 
     Vector3 currentShooterPos;
-
+    Vector3 originalPosition;
+    Quaternion originalRotation;
     private void ReadySmash()
     {
         Ball.GetComponent<Rigidbody>().useGravity = false;
@@ -53,7 +60,19 @@ public class BallShooter : MonoBehaviour
         currentShooterPos = transform.localPosition;
         Ball.transform.localPosition = new Vector3(currentShooterPos.x, dummy_height + 0.5f, currentShooterPos.z);
 
-        // // 회전 초기화
+        // 초기값 저장
+        originalPosition = Ball.transform.position;
+        originalRotation = Ball.transform.rotation;
+    }
+
+    private void ReloadSmash()
+    {
+        Ball.GetComponent<Rigidbody>().useGravity = false;
+        Ball.transform.position = originalPosition;
+        Ball.transform.rotation = originalRotation;
+
+        // 회전 초기화
+        Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
     Vector3 dir;
