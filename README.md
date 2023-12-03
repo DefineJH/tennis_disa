@@ -2,7 +2,6 @@
 
 ![lobby.gif](./Screenshot/gif_lobby.gif)</br>
 ![main.gif](./Screenshot/gif_main.gif)</br>
-![trail.gif](./Screenshot/gif_trail.gif)</br>
 
 ## 1. 현진님 브랜치 적용</br>
 ![main](./Screenshot/20231204_main.png)</br>
