@@ -8,4 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 5deb965500846b64ab123fdbbbc2de24
+  - enabled: 1
+    path: Assets/Scenes/start scene.unity
+    guid: f0fee4959e98e2142b8753f81d9803bb
+  - enabled: 1
+    path: Assets/Scenes/practice.unity
+    guid: dccce20647ebcfa499916a489341de5d
+  - enabled: 1
+    path: Assets/Scenes/mirror.unity
+    guid: 60a838e9942dabf4786e9a45dda13cf8
+  - enabled: 1
+    path: Assets/Scenes/forehand.unity
+    guid: f6156efc8007c644899e5c258b93d759
+  - enabled: 1
+    path: Assets/Scenes/volley.unity
+    guid: df8097e0989ba174e98a09d6f63a8fc6
+  - enabled: 1
+    path: Assets/Scenes/smash.unity
+    guid: ca74a19f4bd0e3d4a867b6ef4cbddde3
   m_configObjects: {}
