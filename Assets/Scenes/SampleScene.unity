@@ -3758,7 +3758,7 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 4
-  UseWebCam: 1
+  UseWebCam: 0
   WebCamIndex: 0
   VideoPlayer: {fileID: 769284634}
 --- !u!23 &1873549734
@@ -3851,7 +3851,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27889227d895094c8cd75784aa13cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   NNModel: {fileID: 5022602860645237092, guid: 419ece2e0059b4e4daba7f628d3c1d36, type: 3}
+=======
+  NNModel: {fileID: 5022602860645237092, guid: e8ce4ea066a903a4e88e21b60bbbf519, type: 3}
+>>>>>>> origin/alstn_branch
   WorkerType: 32768
   Verbose: 0
   VNectModel: {fileID: 1009339738}

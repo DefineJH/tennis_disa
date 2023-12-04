@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/FreeSportsKIt_SA.meta
 guid: 35b2e4306ce179840945a9e5434d7224
 folderAsset: yes
+========
+guid: 33c4daa40fb3c734abbd4f143243a483
+>>>>>>>> origin/alstn_branch:Assets/Scenes/LobbyScene.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
