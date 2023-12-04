@@ -25,7 +25,7 @@ public class PracticeManager : MonoBehaviour
         // 싱글턴 인스턴스 초기화
         if (instance == null) {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         } else if (instance != this) {
             Destroy(gameObject);
             return;
@@ -95,6 +95,7 @@ public class PracticeManager : MonoBehaviour
             //연습 종료
             if (nowRound > maxRound) {
                 ReloadText.text = $"End of Train";
+                StartCoroutine(IEnumQuit(3f));//끝나면 나가기
             }
 
         } else {
@@ -170,5 +171,11 @@ public class PracticeManager : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         hitText.gameObject.SetActive(false); // 텍스트 숨김
+    }
+
+    private IEnumerator IEnumQuit(float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene("LobbyScene");
     }
 }
