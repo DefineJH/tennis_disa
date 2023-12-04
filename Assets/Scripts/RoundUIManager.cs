@@ -30,7 +30,7 @@ public class RoundUIManager : MonoBehaviour
     {
     }
 
-    public void SetRoundResult(int roundIndex, bool isSuccess)
+    public void SetRoundUIResult(int roundIndex, bool isSuccess)
     {
         if (roundIndex <= roundContainer.childCount) {
             Image roundImage = roundContainer.GetChild(roundIndex - 1).GetComponent<Image>();

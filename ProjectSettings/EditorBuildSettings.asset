@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LobbyScene.unity
     guid: 33c4daa40fb3c734abbd4f143243a483
   - enabled: 1
-    path: Assets/Scenes/PracticeScence.unity
+    path: Assets/Scenes/PracticeScene.unity
     guid: 5deb965500846b64ab123fdbbbc2de24
   m_configObjects: {}

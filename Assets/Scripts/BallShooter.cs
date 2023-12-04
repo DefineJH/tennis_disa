@@ -7,9 +7,6 @@ public class BallShooter : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject Ball;
-    public Text TotalTrialText;
-    private int reloadTime = 10;
-    private int totalTrial = 5;
 
     // 권장 설정
     // 스매쉬 hitMode = "Smash", angle = 40, power = 620 
@@ -24,12 +21,8 @@ public class BallShooter : MonoBehaviour
     private float dummy_height = 1.5f;
     void Start()
     {
-        //PracticeManager와 연결
-        reloadTime = PracticeManager.instance.reloadTime;
-        totalTrial = PracticeManager.instance.maxRound;
+        //PracticeManager로부터 현재의 hitMode 가져옴
         hitMode = PracticeManager.instance.practiceMode;
-
-        TotalTrialText.text = $"1/{totalTrial}";
 
         if (hitMode == "Smash" || hitMode == "smash")
         {
@@ -47,31 +40,19 @@ public class BallShooter : MonoBehaviour
     }
 
     // Update is called once per frame
-    float timeCount = 0;
-    int hitCount = 1;
     void Update()
     {
-        //PracticeManager와 연결
-        timeCount = PracticeManager.instance.roundTimeCount;
-        hitCount = PracticeManager.instance.nowRound;
-
-        if (hitCount > totalTrial)
-        {
-            return;
-        }
-
-        //timeCount += Time.deltaTime;
-
-        if (timeCount > reloadTime)
-        {
-            Hit();
-            //PracticeManager 이용
-            PracticeManager.instance.MoveNextRound();
-            TotalTrialText.text = $"{hitCount}/{totalTrial}";
-        }
-        else if (timeCount > reloadTime - 3)
-        {
-            ReloadHit();
+        //PracticeManager로부터 타이머 가져오기
+        if (PracticeManager.instance.isRoundCount == true) {
+            if (PracticeManager.instance.roundTimeCount > PracticeManager.instance.reloadTime) {
+                //공 던지기 남은 시간 0초 시 공 발사
+                Hit();
+                PracticeManager.instance.isRoundCount = false;
+                //TotalTrialText.text = $"{hitCount}/{totalTrial}";
+            } else if (PracticeManager.instance.roundTimeCount > PracticeManager.instance.reloadTime - 3) {
+                //공 던지기 전 준비
+                ReloadHit();
+            }
         }
     }
 
@@ -93,6 +74,7 @@ public class BallShooter : MonoBehaviour
         originalPosition = Ball.transform.position;
         originalRotation = Ball.transform.rotation;
     }
+
     private Vector3 dir;
     private void Hit()
     {
@@ -114,5 +96,8 @@ public class BallShooter : MonoBehaviour
         // 회전 초기화
         Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+        //궤적 초기화(공 위치 초기화 시 일직선의 긴 선 그려지는 것 방지)
+        PracticeManager.instance.trailRenderer.InitPoint();
     }
 }

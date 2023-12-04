@@ -35,4 +35,13 @@ public class TrailRenderer : MonoBehaviour
         lineRenderer.positionCount = points.Count;
         lineRenderer.SetPositions(points.ToArray());
     }
+
+    /// <summary>
+    /// 포인트 배열 초기화
+    /// </summary>
+    public void InitPoint()
+    {
+        points = new List<Vector3>();
+        pointTimes = new List<float>();
+    }
 }

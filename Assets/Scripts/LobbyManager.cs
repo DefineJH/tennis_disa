@@ -36,11 +36,6 @@ public class LobbyManager : MonoBehaviour
     public void OnPoseSelect(int modeIndex)
     {
         GameManager.instance.SetGameMode((GameManager.GameMode)modeIndex);
-        SceneManager.LoadScene("PracticeScence"); // 연습모드 씬 로드
-    }
-
-    public void SceneChange()
-    {
-        SceneManager.LoadScene("PracticeScence");
+        SceneManager.LoadScene("PracticeScene"); // 연습모드 씬 로드
     }
 }
