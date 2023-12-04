@@ -210,8 +210,10 @@ public class VNectBarracudaRunner : MonoBehaviour
         // Init VideoCapture
         videoCapture.Init(InputImageSize, InputImageSize);
         Lock = false;
+
         //Msg.gameObject.SetActive(false);
         MsgPannel.gameObject.SetActive(false);
+        
     }
 
     private const string inputName_1 = "input.1";
@@ -273,6 +275,7 @@ public class VNectBarracudaRunner : MonoBehaviour
             b_outputs[i].Dispose();
         }
 
+        PracticeManager.instance.isStartModel = true;
         PredictPose();
     }
 

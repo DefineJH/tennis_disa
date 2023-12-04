@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviour
 {
+    public GameObject ModeSelectPanel;
+    public GameObject PoseSelectPanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,25 @@ public class LobbyManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// 연습모드 선택 시 자세 선택으로 넘어감.
+    /// </summary>
+    public void OnPracticeSelect()
+    {
+        ModeSelectPanel.SetActive(false);
+        PoseSelectPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// 포즈 선택 시 선택 정보가 다음 씬으로 넘어감. (GameManager의 DontDestroyOnLoad 이용)
+    /// </summary>
+    /// <param name="modeIndex"></param>
+    public void OnPoseSelect(int modeIndex)
+    {
+        GameManager.instance.SetGameMode((GameManager.GameMode)modeIndex);
+        SceneManager.LoadScene("PracticeScence"); // 연습모드 씬 로드
     }
 
     public void SceneChange()

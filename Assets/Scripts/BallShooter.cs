@@ -7,10 +7,9 @@ public class BallShooter : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject Ball;
-    public Text ReloadText;
     public Text TotalTrialText;
-    public int reloadTime = 10;
-    public int totalTrial = 5;
+    private int reloadTime = 10;
+    private int totalTrial = 5;
 
     // 권장 설정
     // 스매쉬 hitMode = "Smash", angle = 40, power = 620 
@@ -25,7 +24,11 @@ public class BallShooter : MonoBehaviour
     private float dummy_height = 1.5f;
     void Start()
     {
-        ReloadText.text = $"{reloadTime}";
+        //PracticeManager와 연결
+        reloadTime = PracticeManager.instance.reloadTime;
+        totalTrial = PracticeManager.instance.maxRound;
+        hitMode = PracticeManager.instance.practiceMode;
+
         TotalTrialText.text = $"1/{totalTrial}";
 
         if (hitMode == "Smash" || hitMode == "smash")
@@ -48,28 +51,28 @@ public class BallShooter : MonoBehaviour
     int hitCount = 1;
     void Update()
     {
+        //PracticeManager와 연결
+        timeCount = PracticeManager.instance.roundTimeCount;
+        hitCount = PracticeManager.instance.nowRound;
+
         if (hitCount > totalTrial)
         {
-            ReloadText.text = $"End of Train";
             return;
         }
 
-
-        timeCount += Time.deltaTime;
+        //timeCount += Time.deltaTime;
 
         if (timeCount > reloadTime)
         {
             Hit();
-            timeCount = 0;
-            hitCount += 1;
+            //PracticeManager 이용
+            PracticeManager.instance.MoveNextRound();
             TotalTrialText.text = $"{hitCount}/{totalTrial}";
         }
         else if (timeCount > reloadTime - 3)
         {
             ReloadHit();
         }
-        ReloadText.text = $"{reloadTime - (int)timeCount}";
-
     }
 
     Vector3 currentShooterPos;
