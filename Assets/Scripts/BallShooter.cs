@@ -42,6 +42,10 @@ public class BallShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PracticeManager.instance.nowRound > PracticeManager.instance.maxRound) {
+            return;
+        }
+
         //PracticeManager로부터 타이머 가져오기
         if (PracticeManager.instance.isRoundCount == true) {
             if (PracticeManager.instance.roundTimeCount > PracticeManager.instance.reloadTime) {
