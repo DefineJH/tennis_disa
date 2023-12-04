@@ -132,7 +132,8 @@ public class VNectBarracudaRunner : MonoBehaviour
     /// </summary>
     public float LowPassParam;
 
-    public Text Msg;
+    public GameObject MsgPannel;
+    //public Text Msg;
     public float WaitTimeModelLoad = 10f;
     private float Countdown = 0;
     public Texture2D InitImg;
@@ -209,7 +210,10 @@ public class VNectBarracudaRunner : MonoBehaviour
         // Init VideoCapture
         videoCapture.Init(InputImageSize, InputImageSize);
         Lock = false;
-        Msg.gameObject.SetActive(false);
+
+        //Msg.gameObject.SetActive(false);
+        MsgPannel.gameObject.SetActive(false);
+        
     }
 
     private const string inputName_1 = "input.1";
@@ -271,6 +275,7 @@ public class VNectBarracudaRunner : MonoBehaviour
             b_outputs[i].Dispose();
         }
 
+        PracticeManager.instance.isStartModel = true;
         PredictPose();
     }
 
