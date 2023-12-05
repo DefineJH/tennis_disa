@@ -1,5 +1,5 @@
-# 김민수 브랜치 (2023-12-05)
-
+# 김민수 브랜치 (2023-12-06)
+2023-12-06 수정 사항: 공 탄성 추가, 공의 힘/각도 값 변경, 공 힘/각도 조절 편의성 추가(값 고정->조절 가능, 대신 canCustumize 값 true로 체크해야함), UI 렌더링 모드 수정(3d 오브젝트가 ui 화면을 뚫는 오류 해결)</br>
 ![lobby.gif](./Screenshot/gif_lobby.gif)</br>
 ![main.gif](./Screenshot/gif_main.gif)</br>
 

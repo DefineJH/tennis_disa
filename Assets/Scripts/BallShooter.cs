@@ -9,14 +9,15 @@ public class BallShooter : MonoBehaviour
     public GameObject Ball;
 
     // 권장 설정
-    // 스매쉬 hitMode = "Smash", angle = 40, power = 620 
     // 포핸드 hitMode = "Forehand", angle = 30, power = 710 
     // 볼리 hitMode = "Volley", angle = 20, power = 700
+    // 스매쉬 hitMode = "Smash", angle = 40, power = 620
+    public bool canCustomize = false;
     public string hitMode;
     [Range(-45, 90)]
-    public float angle = 0f;
+    public float angle = 20f;
     [Range(100, 1000)]
-    public float power = 300f;
+    public float power = 700f;
 
     private float dummy_height = 1.5f;
     void Start()
@@ -28,20 +29,35 @@ public class BallShooter : MonoBehaviour
         {
             // 더미 플레이어 위치를 로컬벡터로 넘김
             ReadyHit(new Vector3(-1f, 0.75f, -3.0f));
+            angle = 40f;
+            power = 620f;
         }
         else if (hitMode == "Forehand" || hitMode == "forehand")
         {
             ReadyHit(new Vector3(-1f, 0.75f, -5.25f));
+            angle = 30f;
+            power = 680f;
         }
         else if (hitMode == "Volley" || hitMode == "volley")
         {
             ReadyHit(new Vector3(-1f, 0.75f, -3.0f));
+            angle = 20f;
+            power = 700f;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        #if UNITY_EDITOR
+        if (canCustomize) {
+            if(hitMode != PracticeManager.instance.practiceMode) {
+                PracticeManager.instance.practiceMode = hitMode;
+                PracticeManager.instance.poseText.text = $"{hitMode}(canCustomize)";
+            }
+        }
+        #endif
+
         if (PracticeManager.instance.nowRound > PracticeManager.instance.maxRound) {
             return;
         }
