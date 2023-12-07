@@ -772,6 +772,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Racket
       objectReference: {fileID: 0}
+    - target: {fileID: 5395532390174382729, guid: 28d12bfff70663f4496d91598b28535e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Racket
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28d12bfff70663f4496d91598b28535e, type: 3}
 --- !u!1 &245519900
@@ -7205,7 +7210,7 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 4
-  UseWebCam: 0
+  UseWebCam: 1
   WebCamIndex: 0
   VideoPlayer: {fileID: 769284634}
 --- !u!23 &1873549734
