@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -45,11 +45,7 @@ public class VideoCapture : MonoBehaviour
             WebCamIndex = 0;
         }
         
-        Application.RequestUserAuthorization(UserAuthorization.WebCam);
-        
         webCamTexture = new WebCamTexture(devices[WebCamIndex].name);
-
-
 
         var sd = VideoScreen.GetComponent<RectTransform>();
         VideoScreen.texture = webCamTexture;
