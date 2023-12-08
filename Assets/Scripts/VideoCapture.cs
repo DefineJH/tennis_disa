@@ -39,25 +39,16 @@ public class VideoCapture : MonoBehaviour
     /// </summary>
     private void CameraPlayStart()
     {
-#if UNITY_EDITOR
         WebCamDevice[] devices = WebCamTexture.devices;
         if(devices.Length <= WebCamIndex)
         {
             WebCamIndex = 0;
         }
         
-        webCamTexture = new WebCamTexture(devices[WebCamIndex].name);
-#elif UNITY_ANDRIOD
-        WebCamDevice device;
-        WebCamTexture tex;
+        Application.RequestUserAuthorization(UserAuthorization.WebCam);
         
-        if(!Permission.HasUserAuthorizedPermission(Permission.Camera))
-        {
-           Permission.RequestUserPermission(Permission.Camera);
-        }
-        device = WebCamTexture.devices.First();
-        webCamTexture = new WebCamTexture(device.name);
-#endif
+        webCamTexture = new WebCamTexture(devices[WebCamIndex].name);
+
 
 
         var sd = VideoScreen.GetComponent<RectTransform>();

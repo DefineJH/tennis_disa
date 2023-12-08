@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &4766887888803875895
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423710135006075385}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7276034279916036341, guid: b8a62e7a032fc924b9dca17863c4aa7d, type: 3}
 --- !u!1 &2882101219512882882
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +26,7 @@ GameObject:
   - component: {fileID: 2882101219512882881}
   m_Layer: 0
   m_Name: Racket
-  m_TagString: Untagged
+  m_TagString: Racket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da97fa144825f34db7697b2eee3647b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hand_joint: {fileID: 0}
   deviceName: TENNIS
-  Racket: {fileID: 7821878623780115223}
-  distanceFromCamera: 2
+  connectBtn: {fileID: 0}
+  guideText: {fileID: 0}
+  offsetBtn: {fileID: 0}
 --- !u!1001 &2882101219549135114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -116,15 +132,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e63047e14b39bc49b4d8a5a7d39e467, type: 3}
---- !u!1 &7821878623780115223 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5436868260460024349, guid: 7e63047e14b39bc49b4d8a5a7d39e467,
-    type: 3}
-  m_PrefabInstance: {fileID: 2882101219549135114}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7478004556250663341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4627574288166193319, guid: 7e63047e14b39bc49b4d8a5a7d39e467,
+    type: 3}
+  m_PrefabInstance: {fileID: 2882101219549135114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1423710135006075385 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3764251832778184947, guid: 7e63047e14b39bc49b4d8a5a7d39e467,
     type: 3}
   m_PrefabInstance: {fileID: 2882101219549135114}
   m_PrefabAsset: {fileID: 0}

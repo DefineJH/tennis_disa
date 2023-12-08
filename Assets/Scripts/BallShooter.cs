@@ -105,7 +105,7 @@ public class BallShooter : MonoBehaviour
         Ball.GetComponent<Rigidbody>().AddForce(dir * power);
         Ball.GetComponent<Rigidbody>().AddTorque(Vector3.right * power);
     }
-    private void ReloadHit()
+    public void ReloadHit()
     {
         Ball.GetComponent<Rigidbody>().useGravity = false;
 

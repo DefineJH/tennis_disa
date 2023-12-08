@@ -136,6 +136,7 @@ public class PracticeManager : MonoBehaviour
 
     public void GoNextRound()
     {
+        ballShooter.ReloadHit();
         roundTimeCount = 0;
         isRoundCount = true;
         nowRound += 1;
