@@ -839,7 +839,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 598982856}
-        m_MethodName: SceneChange
+        m_MethodName: OnMirrorSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

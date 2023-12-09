@@ -8,16 +8,18 @@ public class LobbyManager : MonoBehaviour
     public GameObject ModeSelectPanel;
     public GameObject PoseSelectPanel;
 
+    public string whichMode;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
@@ -27,6 +29,16 @@ public class LobbyManager : MonoBehaviour
     {
         ModeSelectPanel.SetActive(false);
         PoseSelectPanel.SetActive(true);
+    }
+
+    /// <summary>
+    /// 거울모드 선택 시 바로 거울 연습장으로 넘어감.
+    /// </summary>
+    public void OnMirrorSelect()
+    {
+        ModeSelectPanel.SetActive(false);
+        GameManager.instance.SetMirrorMode();
+        SceneManager.LoadScene("MirrorScene"); // 연습모드 씬 로드
     }
 
     /// <summary>
