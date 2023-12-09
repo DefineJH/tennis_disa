@@ -38,17 +38,21 @@ public class MirrorBall : MonoBehaviour
                 // MirrorManager.instance.GoNextRound();
                 isHitByRacket = false;
 
-                ballOkPos = transform.position;
-                Debug.Log(ballOkPos);
+                //Debug.Log(ballOkPos);
 
             }
         }
     }
+    public Vector3 incidentAngle;
     void OnCollisionEnter(Collision collision)
     {
         // 라켓에 부딪혔을 때
         if (collision.gameObject.CompareTag("Racket"))
         {
+            // incidentAngle = collision.transform.eulerAngles;
+            // Debug.Log(incidentAngle);
+            // incidentAngle.y = 2 * 180f - incidentAngle.y;
+            ballOkPos = transform.position;
             checkAccel = true;
             isHitByRacket = true;
         }

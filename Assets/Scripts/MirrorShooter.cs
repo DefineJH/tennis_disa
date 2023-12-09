@@ -21,7 +21,7 @@ public class MirrorShooter : MonoBehaviour
     void Start()
     {
         middle = TennisNet.transform.position;
-        ReadyHit(new Vector3(-1f, 0.75f, -3.0f));
+        ReadyHit(new Vector3(-1f, 0.0f, -3.0f));
     }
 
     private bool isFirstBall = true;
@@ -53,10 +53,14 @@ public class MirrorShooter : MonoBehaviour
         {
             ReloadHit();
             Ball.GetComponent<Rigidbody>().useGravity = true;
+            // 3차원 가속도 1차원으로 변환
             power = Vector3.Distance(Ball.GetComponent<MirrorBall>().acceleration, new Vector3(0, 0, 0));
+            // 튕기는 각도 아직 못 구함 임의 값임
+            angle = 30;
             dir = Quaternion.AngleAxis(-1 * angle, Vector3.right) * Vector3.forward;
-            //2.5는 임의값 
-            Ball.GetComponent<Rigidbody>().AddForce(dir * power * 2.5f);
+            //2.0는 임의 질량값 
+            Ball.GetComponent<Rigidbody>().AddForce(dir * power * 2f);
+            Ball.GetComponent<Rigidbody>().AddTorque(Vector3.right * power);
             switchPos = true;
         }
 
@@ -155,13 +159,15 @@ public class MirrorShooter : MonoBehaviour
     {
         Ball.GetComponent<Rigidbody>().useGravity = false;
 
+        // 점대칭 
         Ball.transform.position = 2 * middle - Player.transform.position;
+        transform.position = new Vector3(Ball.transform.position.x - 1, 0, Ball.transform.position.z);
         // Ball.transform.position = originalPosition;
         Ball.transform.rotation = originalRotation;
 
         // 공 위치 리셋
-        Ball.transform.position = originalPosition;
-        Ball.transform.rotation = originalRotation;
+        // Ball.transform.position = originalPosition;
+        // Ball.transform.rotation = originalRotation;
 
         // 회전 초기화
         Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
