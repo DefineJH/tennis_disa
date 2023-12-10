@@ -370,7 +370,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.26e-41, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 5.567e-42, y: 1.01e-43, z: 6.981e-42, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -564,6 +564,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229035762}
   m_CullTransparentMesh: 0
+--- !u!1 &238287397
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 238287398}
+  m_Layer: 0
+  m_Name: racketSocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &238287398
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238287397}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.042, y: -0, z: -0.009}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8315583862970724776}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245519900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1009339737}
   Ball: {fileID: 1697727541}
-  MainCamera: {fileID: 534669902}
+  MainCamera: {fileID: 0}
   TennisNet: {fileID: 603538606}
   angle: 30
   power: 620
@@ -7199,7 +7229,7 @@ PrefabInstance:
         type: 3}
       propertyPath: hand_joint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 238287397}
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7213,12 +7243,12 @@ PrefabInstance:
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.697
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
@@ -7233,7 +7263,7 @@ PrefabInstance:
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
@@ -7243,7 +7273,7 @@ PrefabInstance:
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 305100168608045403, guid: 4d1be50b994cff642b63f8a4f71750aa,
         type: 3}
@@ -8870,7 +8900,6 @@ MonoBehaviour:
   ballLandPos: {x: 0, y: 0, z: 0}
   okShot: 0
   reflectAngle: 0
-  collisionPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1709603508
 GameObject:
   m_ObjectHideFlags: 0
@@ -10840,3 +10869,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 376f47ea3b23a0c4390f513d69e1ca66, type: 3}
+--- !u!4 &8315583862970724776 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8315583863143700756, guid: 376f47ea3b23a0c4390f513d69e1ca66,
+    type: 3}
+  m_PrefabInstance: {fileID: 8315583862970724775}
+  m_PrefabAsset: {fileID: 0}
