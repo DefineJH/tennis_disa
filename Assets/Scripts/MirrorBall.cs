@@ -42,6 +42,7 @@ public class MirrorBall : MonoBehaviour
     }
     private Vector3 normal;
     public float reflectAngle;
+    public Vector3 collisionPos;
     void OnCollisionEnter(Collision collision)
     {
         // 라켓에 부딪혔을 때
@@ -52,6 +53,7 @@ public class MirrorBall : MonoBehaviour
             isHitByRacket = true;
             Debug.Log("Hit");
             capturedVelocity = GetComponent<Rigidbody>().velocity;
+            collisionPos = collision.contacts[0].point;
 
             // normal = collision.contacts[0].normal;
             // reflectAngle = 180f - Vector3.Angle(capturedVelocity, -normal);

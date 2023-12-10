@@ -123,6 +123,8 @@ public class MirrorShooter : MonoBehaviour
         Ball.GetComponent<Rigidbody>().useGravity = false;
 
         // 네트 기준 점대칭 공 포지션
+        tmp = 2 * middle - playerInitialPos;
+        tmp.y = MirrorManager.instance.mirrorBall.collisionPos.y;
         Ball.transform.position = 2 * middle - playerInitialPos;
         transform.position = new Vector3(Ball.transform.position.x - 1, 0, Ball.transform.position.z);
 
