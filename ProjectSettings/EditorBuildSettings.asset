@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PracticeScene.unity
     guid: 5deb965500846b64ab123fdbbbc2de24
+  - enabled: 1
+    path: Assets/Scenes/MirrorScene.unity
+    guid: ee741f05ea092d34e90eb1c37d2375f1
   m_configObjects: {}

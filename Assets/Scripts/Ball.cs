@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 public class Ball : MonoBehaviour
 {
     private bool isHitByRacket = false;
-    void OnTriggerEnter( Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (isHitByRacket)
         {
@@ -23,16 +23,18 @@ public class Ball : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // 라켓에 부딪혔을 때
-        if (collision.gameObject.CompareTag("Racket")) {
-            
+        if (collision.gameObject.CompareTag("Racket"))
+        {
+
             isHitByRacket = true;
         }
 
         // 땅에 부딪혔을 때
-        else if (collision.gameObject.CompareTag("Ground")) {
-                PracticeManager.instance.roundUIManager.SetRoundUIResult(PracticeManager.instance.nowRound, false);
-                PracticeManager.instance.ShowHitUI(0);
-                PracticeManager.instance.GoNextRound();
+        else if (collision.gameObject.CompareTag("Ground"))
+        {
+            PracticeManager.instance.roundUIManager.SetRoundUIResult(PracticeManager.instance.nowRound, false);
+            PracticeManager.instance.ShowHitUI(0);
+            PracticeManager.instance.GoNextRound();
             // 상태 초기화
             isHitByRacket = false;
         }
