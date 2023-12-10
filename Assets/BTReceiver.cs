@@ -153,11 +153,17 @@ public class BTReceiver : MonoBehaviour
         }
         if(bluetoothHelper.isConnected())
         {
-            connectBtn.gameObject.SetActive(false);
+            if(connectBtn != null)
+            {
+                connectBtn.gameObject.SetActive(false);
+            }
         }
         else
         {
-            connectBtn.gameObject.SetActive(true);
+            if (connectBtn != null)
+            {
+                connectBtn.gameObject.SetActive(true);
+            }
         }
         if(guideText != null)
         {
