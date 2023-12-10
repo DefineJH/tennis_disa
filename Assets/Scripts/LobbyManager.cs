@@ -9,7 +9,7 @@ public class LobbyManager : MonoBehaviour
     public GameObject PoseSelectPanel;
 
     public string whichMode;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +48,6 @@ public class LobbyManager : MonoBehaviour
     public void OnPoseSelect(int modeIndex)
     {
         GameManager.instance.SetGameMode((GameManager.GameMode)modeIndex);
-        SceneManager.LoadScene("PracticeScene"); // 연습모드 씬 로드
+        SceneManager.LoadScene("VidScene"); // 연습모드 씬 로드
     }
 }

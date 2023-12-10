@@ -33,12 +33,12 @@ public class BTReceiver : MonoBehaviour
         deviceName = "TENNIS"; //bluetooth should be turned ON;
         try
         {
-            Connect();
             bluetoothHelper = BluetoothHelper.GetInstance(deviceName);
             bluetoothHelper.OnConnected += OnConnected;
             bluetoothHelper.OnConnectionFailed += OnConnectionFailed;
             bluetoothHelper.OnDataReceived += OnMessageReceived; //read the data
             bluetoothHelper.setTerminatorBasedStream("\n"); //delimits received messages based on \n char
+            Connect();
         }
         catch (Exception ex)
         {
