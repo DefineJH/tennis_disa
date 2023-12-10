@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class MirrorShooter : MonoBehaviour
 {
-
     public GameObject Player;
     public GameObject Ball;
 
+    public GameObject MainCamera;
     public GameObject TennisNet;
 
     // public bool canCustomize = false;
@@ -17,17 +17,23 @@ public class MirrorShooter : MonoBehaviour
     [Range(100, 1000)]
     public float power = 620f;
     private float dummy_height = 1.5f;
+
+    private Vector3 dummyPos;
+
+    private Vector3 playerInitialPos;
     // Start is called before the first frame update
     void Start()
     {
+        playerInitialPos = Player.transform.position;
         middle = TennisNet.transform.position;
-        ReadyHit(new Vector3(-1f, 0.0f, -3.0f));
+        dummyPos = new Vector3(-1f, 0.0f, -3.0f);
+        ReadyHit();
+
     }
 
-    private bool isFirstBall = true;
-
-    private bool posAdjust = true;
-    private bool switchPos = false;
+    public bool isFirstBall = true;
+    public bool switchPos = false;
+    private Vector3 dummyVelocity;
     // Update is called once per frame
     void Update()
     {
@@ -40,99 +46,51 @@ public class MirrorShooter : MonoBehaviour
         //         }
         // #endif
 
-        // Player.transform.position = new Vector3(1f, 1f, 1f);
-
-        if (MirrorManager.instance.gameTimeCount > 3 && isFirstBall == true)
+        if (MirrorManager.instance.roundTimeCount > 20 && switchPos == true)
+        {
+            MirrorManager.instance.GoNextRound();
+        }
+        // 유효 타일 때
+        else if (MirrorManager.instance.roundTimeCount > 10 && switchPos == false)
+        {
+            Debug.Log(MirrorManager.instance.mirrorBall.okShot);
+            if (MirrorManager.instance.mirrorBall.okShot == true) // 유효 타
+            {
+                Ball.GetComponent<Rigidbody>().useGravity = true;
+                dummyVelocity = MirrorManager.instance.mirrorBall.capturedVelocity;
+                dummyVelocity.z *= -1;
+                dummyVelocity.x *= -1;
+                Ball.GetComponent<Rigidbody>().velocity = dummyVelocity;
+                MirrorManager.instance.mirrorBall.okShot = false;
+            }
+            switchPos = true;
+        }
+        // 유효 타일 때 (준비)
+        else if (MirrorManager.instance.roundTimeCount > 7 && switchPos == false)
+        {
+            Debug.Log(MirrorManager.instance.mirrorBall.okShot);
+            if (MirrorManager.instance.mirrorBall.okShot == true) // 유효 타
+            {
+                ReloadPlayerHit();
+            }
+            else // 유효 타가 아님
+            {
+                MirrorManager.instance.GoNextRound();
+            }
+        }
+        // 첫 공
+        else if (MirrorManager.instance.roundTimeCount > 3 && isFirstBall == true)
         {
             isFirstBall = false;
             FirstBall();
-            posAdjust = false;
         }
 
-        if (MirrorManager.instance.gameTimeCount > 6 && switchPos == false)
-        {
-            ReloadHit();
-            Ball.GetComponent<Rigidbody>().useGravity = true;
-            // 3차원 가속도 1차원으로 변환
-            /*
-            power = Vector3.Distance(Ball.GetComponent<MirrorBall>().acceleration, new Vector3(0, 0, 0));
-            // 튕기는 각도 아직 못 구함 임의 값임
-            angle = 30;
-            dir = Quaternion.AngleAxis(-1 * angle, Vector3.right) * Vector3.forward;
-            //2.0는 임의 질량값 
-            Ball.GetComponent<Rigidbody>().AddForce(dir * power * 2f);
-            Ball.GetComponent<Rigidbody>().AddTorque(Vector3.right * power);
-            */
-            //김민수 테스트
-            Ball.GetComponent<Rigidbody>().velocity = - MirrorManager.instance.mirrorBall.capturedVelocity;
-            switchPos = true;
-        }
-
-
-
-        //MirrorManager로부터 타이머 가져오기
-        // if (MirrorManager.instance.gameTimeCount > MirrorManager.instance.reloadTime + 3 && posAdjust == false)
-        // {
-        //     Debug.Log("Pos Adjusted");
-        //     Vector3 p0 = new Vector3(4.8858f, 0f, -0.6155435f);
-        //     Vector3 p1 = new Vector3(-4.910632f, 0f, -0.6155435f);
-        //     // Form a unit vector in the direction of the line.
-        //     Vector3 lineDirection = (p1 - p0).normalized;
-
-        //     // Rotate the vector 90 degrees in the XY plane
-        //     // to get a vector perpendicular to the mirror line.
-        //     Vector3 perpendicular = new Vector3(-lineDirection.z, 0f, lineDirection.x);
-        //     // If you're working in the XZ plane instead, it's
-        //     // (-lineDirection.z, 0, lineDirection.x)
-
-        //     // Take away a's perpendicular offset from this line, twice.
-        //     // Once to flatten a onto the line, and a second time to make b,
-        //     // an equal distance away on the opposite side of the line.
-        //     Vector3 a = Ball.GetComponent<MirrorBall>().ballOkPos;
-        //     Vector3 b = a - 2 * Vector3.Dot((a - p0), perpendicular) * perpendicular;
-        //     Debug.Log(b);
-        //     Player.transform.position = b;
-        //     posAdjust = true;
-        // }
     }
-    //MirrorManager로부터 타이머 가져오기
-    // if (MirrorManager.instance.isRoundCount == true)
-    // {
-    //     if (MirrorManager.instance.roundTimeCount > MirrorManager.instance.reloadTime)
-    //     {
-    //         //공 던지기 남은 시간 0초 시 공 발사
-    //         FirstBall();
-    //         MirrorManager.instance.isRoundCount = false;
-    //         //TotalTrialText.text = $"{hitCount}/{totalTrial}";
-    //     }
-    //     else if (MirrorManager.instance.roundTimeCount > MirrorManager.instance.reloadTime - 3 && MirrorManager.instance.gameTimeCount > 10)
-    //     {
-    //         //공 던지기 전 준비
-    //         ReloadHit();
-    //         Vector3 p0 = new Vector3(4.8858f, 0f, -0.6155435f);
-    //         Vector3 p1 = new Vector3(-4.910632f, 0f, -0.6155435f);
-    //         // Form a unit vector in the direction of the line.
-    //         Vector3 lineDirection = (p1 - p0).normalized;
-
-    //         // Rotate the vector 90 degrees in the XY plane
-    //         // to get a vector perpendicular to the mirror line.
-    //         Vector3 perpendicular = new Vector3(-lineDirection.z, 0, lineDirection.x);
-    //         // If you're working in the XZ plane instead, it's
-    //         // (-lineDirection.z, 0, lineDirection.x)
-
-    //         // Take away a's perpendicular offset from this line, twice.
-    //         // Once to flatten a onto the line, and a second time to make b,
-    //         // an equal distance away on the opposite side of the line.
-    //         Vector3 a = Ball.GetComponent<MirrorBall>().ballOkPos;
-    //         Vector3 b = a - 2 * Vector3.Dot((a - p0), perpendicular) * perpendicular;
-    //         Player.transform.position = b;
-    //     }
-    // }
 
     Vector3 currentShooterPos;
     Vector3 originalPosition;
     Quaternion originalRotation;
-    private void ReadyHit(Vector3 dummyPos)
+    public void ReadyHit()
     {
         Ball.GetComponent<Rigidbody>().useGravity = false;
 
@@ -159,20 +117,42 @@ public class MirrorShooter : MonoBehaviour
     }
 
     private Vector3 middle;
-    public void ReloadHit()
+    private Vector3 tmp;
+    public void ReloadPlayerHit()
     {
         Ball.GetComponent<Rigidbody>().useGravity = false;
 
-        // 점대칭 
-        Ball.transform.position = 2 * middle - Player.transform.position;
+        // 네트 기준 점대칭 공 포지션
+        Ball.transform.position = 2 * middle - playerInitialPos;
         transform.position = new Vector3(Ball.transform.position.x - 1, 0, Ball.transform.position.z);
-        // Ball.transform.position = originalPosition;
+
+        // 네트 기준 공 착률 지점 점대칭 유저 포지션
+        tmp = 2 * middle - MirrorManager.instance.mirrorBall.ballLandPos;
+        tmp.y = 0f;
+        Player.transform.position = tmp;
+        tmp.y = 1.6f;
+        MainCamera.transform.position = tmp;
+
         Ball.transform.rotation = originalRotation;
 
-        // 공 위치 리셋
-        // Ball.transform.position = originalPosition;
-        // Ball.transform.rotation = originalRotation;
+        // 회전 초기화
+        Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        Ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
+        //궤적 초기화(공 위치 초기화 시 일직선의 긴 선 그려지는 것 방지)
+        MirrorManager.instance.trailRenderer.InitPoint();
+    }
+
+    public void ReloadRegularHit()
+    {
+        Ball.GetComponent<Rigidbody>().useGravity = false;
+
+        transform.localPosition = dummyPos;
+        // 공 위치 리셋
+        Ball.transform.position = originalPosition;
+        Ball.transform.rotation = originalRotation;
+
+        Player.transform.position = playerInitialPos;
         // 회전 초기화
         Ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
         Ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;

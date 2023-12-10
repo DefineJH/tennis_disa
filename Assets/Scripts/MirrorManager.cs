@@ -12,7 +12,7 @@ public class MirrorManager : MonoBehaviour
     public MirrorShooter mirrorShooter;
     public TrailRenderer trailRenderer;
     //임시 추가
-    public MirrorBall mirrorBall; 
+    public MirrorBall mirrorBall;
 
     // public string practiceMode = "smash";//현재 연습의 모드
 
@@ -72,14 +72,13 @@ public class MirrorManager : MonoBehaviour
             //모델 작동 시 타이머 작동
             gameTimeCount += Time.deltaTime;
 
-            // roundTimeCount += Time.deltaTime;
-            ReloadText.text = $"{(int)gameTimeCount}";
-            // if (isRoundCount)
-            // {
-            //     roundTimeCount += Time.deltaTime;
-            //     //공 던지기 남은 시간 표기
-            //     ReloadText.text = $"{reloadTime - (int)roundTimeCount}";
-            // }
+            ReloadText.text = $"{(int)roundTimeCount}";
+            if (isRoundCount)
+            {
+                roundTimeCount += Time.deltaTime;
+                //공 던지기 남은 시간 표기
+                // ReloadText.text = $"{reloadTime - (int)roundTimeCount}";
+            }
             // // else
             // // {
             // //     //공이 던져졌을 때 go 표기
@@ -120,10 +119,10 @@ public class MirrorManager : MonoBehaviour
     public void Restart()
     {
         TogglePause();
-        // nowRound = 1; //현재 라운드
+        nowRound = 1; //현재 라운드
         gameTimeCount = 0; //게임 전체 타이머
-        // roundTimeCount = 0; //라운드 한정 타이머
-        // isRoundCount = true; //라운드 카운트 여부
+        roundTimeCount = 0; //라운드 한정 타이머
+        isRoundCount = true; //라운드 카운트 여부
         isStartModel = false; //모델 스타트 여부
         isPaused = false; //모델 스타트 여부
     }
@@ -133,14 +132,6 @@ public class MirrorManager : MonoBehaviour
         TogglePause();
         SceneManager.LoadScene("LobbyScene"); // 로비 씬 로드
     }
-
-    // public void GoNextRound()
-    // {
-    //     ballShooter.ReloadHit();
-    //     roundTimeCount = 0;
-    //     isRoundCount = true;
-    //     nowRound += 1;
-    // }
 
     //타격 성공 or 실패 텍스트 보여주기(score: 0~100)
     public void ShowHitUI(int score)
@@ -176,7 +167,9 @@ public class MirrorManager : MonoBehaviour
     }
     public void GoNextRound()
     {
-        mirrorShooter.ReloadHit();
+        mirrorShooter.ReloadRegularHit();
+        mirrorShooter.switchPos = false;
+        mirrorShooter.isFirstBall = true;
         roundTimeCount = 0;
         isRoundCount = true;
         nowRound += 1;

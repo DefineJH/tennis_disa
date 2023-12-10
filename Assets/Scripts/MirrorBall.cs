@@ -9,24 +9,18 @@ public class MirrorBall : MonoBehaviour
 
     public Vector3 ballOkPos;
 
-    public Vector3 acceleration;
-
     public Vector3 capturedVelocity;
 
+    public Vector3 ballLandPos;
+    public bool okShot = false;
     void Start()
     {
         ballOkPos = transform.position;
     }
-    public Vector3 lastVelocity;
-    private bool checkAccel = false;
+
     void Update()
     {
-        if (checkAccel == true)
-        {
-            acceleration = (GetComponent<Rigidbody>().velocity - lastVelocity) / Time.deltaTime;
-            checkAccel = false;
-        }
-        lastVelocity = GetComponent<Rigidbody>().velocity;
+
     }
     void OnTriggerEnter(Collider other)
     {
@@ -39,37 +33,40 @@ public class MirrorBall : MonoBehaviour
                 MirrorManager.instance.ShowHitUI(100);
                 // MirrorManager.instance.GoNextRound();
                 isHitByRacket = false;
+                okShot = true;
+                ballLandPos = transform.position;
+                Debug.Log(ballLandPos);
 
-                //Debug.Log(ballOkPos);
-
-                
             }
         }
     }
-    public Vector3 incidentAngle;
+    private Vector3 normal;
+    public float reflectAngle;
     void OnCollisionEnter(Collision collision)
     {
         // 라켓에 부딪혔을 때
         if (collision.gameObject.CompareTag("Racket"))
         {
-            // incidentAngle = collision.transform.eulerAngles;
-            // Debug.Log(incidentAngle);
-            // incidentAngle.y = 2 * 180f - incidentAngle.y;
-            ballOkPos = transform.position;
-            checkAccel = true;
-            isHitByRacket = true;
 
+            ballOkPos = transform.position;
+            isHitByRacket = true;
+            Debug.Log("Hit");
             capturedVelocity = GetComponent<Rigidbody>().velocity;
+
+            // normal = collision.contacts[0].normal;
+            // reflectAngle = 180f - Vector3.Angle(capturedVelocity, -normal);
+            // Debug.Log(reflectAngle);
         }
 
-        // 땅에 부딪혔을 때
-        // else if (collision.gameObject.CompareTag("Ground"))
-        // {
-        //     // MirrorManager.instance.roundUIManager.SetRoundUIResult(MirrorManager.instance.nowRound, false);
-        //     MirrorManager.instance.ShowHitUI(0);
-        //     MirrorManager.instance.GoNextRound();
-        //     // 상태 초기화
-        //     isHitByRacket = false;
-        // }
+        //땅에 부딪혔을 때
+        else if (collision.gameObject.CompareTag("Ground") && okShot == false)
+        {
+            // MirrorManager.instance.roundUIManager.SetRoundUIResult(MirrorManager.instance.nowRound, false);
+            MirrorManager.instance.ShowHitUI(0);
+            // MirrorManager.instance.GoNextRound();
+            // 상태 초기화
+            isHitByRacket = false;
+            okShot = false;
+        }
     }
 }
