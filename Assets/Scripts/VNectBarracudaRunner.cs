@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Barracuda;
+using Google.Protobuf.WellKnownTypes;
 
 /// <summary>
 /// Define Joint points
@@ -132,8 +133,16 @@ public class VNectBarracudaRunner : MonoBehaviour
     /// </summary>
     public float LowPassParam;
 
+    //UI
     public GameObject MsgPannel;
+    public Text WebCamLoadingText;
+    public GameObject WebCamLoadingImage;
+    public GameObject WebCamCheckedImage;
+    public Text ModelLoadingText;
+    public GameObject ModelLoadingImage;
+    public GameObject ModelCheckedImage;
     //public Text Msg;
+    public bool firstLoad = true;
     public float WaitTimeModelLoad = 10f;
     private float Countdown = 0;
     public Texture2D InitImg;
@@ -164,7 +173,6 @@ public class VNectBarracudaRunner : MonoBehaviour
         _worker = WorkerFactory.CreateWorker(WorkerType, _model, Verbose);
 
         StartCoroutine("WaitLoad");
-
     }
 
     private void Update()
@@ -212,8 +220,10 @@ public class VNectBarracudaRunner : MonoBehaviour
         Lock = false;
 
         //Msg.gameObject.SetActive(false);
-        MsgPannel.gameObject.SetActive(false);
-
+        //MsgPannel.gameObject.SetActive(false);
+        WebCamLoadingText.text = "웹캠 로딩 완료!";
+        WebCamLoadingImage.SetActive(false);
+        WebCamCheckedImage.SetActive(true);
     }
 
     private const string inputName_1 = "input.1";
@@ -275,10 +285,21 @@ public class VNectBarracudaRunner : MonoBehaviour
             b_outputs[i].Dispose();
         }
 
-        if (GameManager.instance.whichMode == "Practice")
-            PracticeManager.instance.isStartModel = true;
-        if (GameManager.instance.whichMode == "Mirror")
-            MirrorManager.instance.isStartModel = true;
+        //첫 로드 시 (ExecuteModelAsync는 계속 반복됨)
+        if (firstLoad) {
+            firstLoad = false;
+            ModelLoadingText.text = "모델 로딩 완료!";
+            ModelLoadingImage.SetActive(false);
+            ModelCheckedImage.SetActive(true);
+            //0.5초 뒤에 시작
+            yield return new WaitForSeconds(0.5f);
+            if (GameManager.instance.whichMode == "Practice")
+                PracticeManager.instance.isStartModel = true;
+            if (GameManager.instance.whichMode == "Mirror")
+                MirrorManager.instance.isStartModel = true;
+            MsgPannel.gameObject.SetActive(false);
+        }
+
         PredictPose();
     }
 

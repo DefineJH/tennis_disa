@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -14,8 +15,11 @@ public class PracticeManager : MonoBehaviour
 
     public string practiceMode;//현재 연습의 모드
 
+    //UI
     public Text poseText;
     public Text hitText;
+
+    //일시정지 기능
     public Button pauseButton;
     public GameObject PausePannel;
 
