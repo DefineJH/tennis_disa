@@ -38,6 +38,7 @@ public class BTReceiver : MonoBehaviour
             bluetoothHelper.OnConnectionFailed += OnConnectionFailed;
             bluetoothHelper.OnDataReceived += OnMessageReceived; //read the data
             bluetoothHelper.setTerminatorBasedStream("\n"); //delimits received messages based on \n char
+            Connect();
         }
         catch (Exception ex)
         {
@@ -76,7 +77,7 @@ public class BTReceiver : MonoBehaviour
             float qx = float.Parse(split[1]);
             float qy = float.Parse(split[2]);
             float qz = float.Parse(split[3]);
-            Quaternion sensorRotation = new Quaternion(qy, qz, qx, qw);
+            Quaternion sensorRotation = new Quaternion(-qy, -qz, qx, qw);
             Quaternion adjustedRotation = sensorRotation * Quaternion.Inverse(offsetRotation);
             transform.rotation = adjustedRotation;
         }catch(Exception e)
@@ -150,7 +151,7 @@ public class BTReceiver : MonoBehaviour
         {
             btState = EBTState.unpaired;
         }
-        if(bluetoothHelper.isConnected() )
+        if(bluetoothHelper.isConnected())
         {
             connectBtn.gameObject.SetActive(false);
         }
