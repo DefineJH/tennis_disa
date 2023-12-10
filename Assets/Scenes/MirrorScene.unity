@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 170076734}
-  m_IndirectSpecularColor: {r: 0.43983644, g: 0.4882797, b: 0.56849295, a: 1}
+  m_IndirectSpecularColor: {r: 0.4398369, g: 0.48828024, b: 0.56849337, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -196,7 +196,7 @@ PrefabInstance:
     - target: {fileID: 2882101219512882880, guid: 90b4c3d783a4b1741a59cdb815ac10e1,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.3420201
       objectReference: {fileID: 0}
     - target: {fileID: 2882101219512882880, guid: 90b4c3d783a4b1741a59cdb815ac10e1,
         type: 3}
@@ -206,7 +206,7 @@ PrefabInstance:
     - target: {fileID: 2882101219512882880, guid: 90b4c3d783a4b1741a59cdb815ac10e1,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9396927
       objectReference: {fileID: 0}
     - target: {fileID: 2882101219512882880, guid: 90b4c3d783a4b1741a59cdb815ac10e1,
         type: 3}
@@ -221,7 +221,7 @@ PrefabInstance:
     - target: {fileID: 2882101219512882880, guid: 90b4c3d783a4b1741a59cdb815ac10e1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2882101219512882880, guid: 90b4c3d783a4b1741a59cdb815ac10e1,
         type: 3}
@@ -8724,7 +8724,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballOkPos: {x: 0, y: 0, z: 0}
   acceleration: {x: 0, y: 0, z: 0}
+  capturedVelocity: {x: 0, y: 0, z: 0}
   lastVelocity: {x: 0, y: 0, z: 0}
+  incidentAngle: {x: 0, y: 0, z: 0}
 --- !u!1 &1709603508
 GameObject:
   m_ObjectHideFlags: 0
@@ -8956,6 +8958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mirrorShooter: {fileID: 377938345}
   trailRenderer: {fileID: 1697727547}
+  mirrorBall: {fileID: 1697727549}
   poseText: {fileID: 1487676457}
   hitText: {fileID: 1263417200}
   pauseButton: {fileID: 1676751248}

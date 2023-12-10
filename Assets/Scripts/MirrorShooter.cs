@@ -42,18 +42,19 @@ public class MirrorShooter : MonoBehaviour
 
         // Player.transform.position = new Vector3(1f, 1f, 1f);
 
-        if (MirrorManager.instance.gameTimeCount > 10 && isFirstBall == true)
+        if (MirrorManager.instance.gameTimeCount > 3 && isFirstBall == true)
         {
             isFirstBall = false;
             FirstBall();
             posAdjust = false;
         }
 
-        if (MirrorManager.instance.gameTimeCount > 15 && switchPos == false)
+        if (MirrorManager.instance.gameTimeCount > 6 && switchPos == false)
         {
             ReloadHit();
             Ball.GetComponent<Rigidbody>().useGravity = true;
             // 3차원 가속도 1차원으로 변환
+            /*
             power = Vector3.Distance(Ball.GetComponent<MirrorBall>().acceleration, new Vector3(0, 0, 0));
             // 튕기는 각도 아직 못 구함 임의 값임
             angle = 30;
@@ -61,6 +62,9 @@ public class MirrorShooter : MonoBehaviour
             //2.0는 임의 질량값 
             Ball.GetComponent<Rigidbody>().AddForce(dir * power * 2f);
             Ball.GetComponent<Rigidbody>().AddTorque(Vector3.right * power);
+            */
+            //김민수 테스트
+            Ball.GetComponent<Rigidbody>().velocity = - MirrorManager.instance.mirrorBall.capturedVelocity;
             switchPos = true;
         }
 

@@ -11,6 +11,8 @@ public class MirrorManager : MonoBehaviour
     // public RoundUIManager roundUIManager;
     public MirrorShooter mirrorShooter;
     public TrailRenderer trailRenderer;
+    //임시 추가
+    public MirrorBall mirrorBall; 
 
     // public string practiceMode = "smash";//현재 연습의 모드
 

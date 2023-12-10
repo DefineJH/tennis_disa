@@ -11,6 +11,8 @@ public class MirrorBall : MonoBehaviour
 
     public Vector3 acceleration;
 
+    public Vector3 capturedVelocity;
+
     void Start()
     {
         ballOkPos = transform.position;
@@ -40,6 +42,7 @@ public class MirrorBall : MonoBehaviour
 
                 //Debug.Log(ballOkPos);
 
+                
             }
         }
     }
@@ -55,6 +58,8 @@ public class MirrorBall : MonoBehaviour
             ballOkPos = transform.position;
             checkAccel = true;
             isHitByRacket = true;
+
+            capturedVelocity = GetComponent<Rigidbody>().velocity;
         }
 
         // 땅에 부딪혔을 때
