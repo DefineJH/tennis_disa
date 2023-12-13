@@ -164,6 +164,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 305100168608045403}
     m_Modifications:
+    - target: {fileID: 3764251832778184947, guid: 7e63047e14b39bc49b4d8a5a7d39e467,
+        type: 3}
+      propertyPath: m_TagString
+      value: Racket
+      objectReference: {fileID: 0}
     - target: {fileID: 4627574288166193319, guid: 7e63047e14b39bc49b4d8a5a7d39e467,
         type: 3}
       propertyPath: m_LocalPosition.x

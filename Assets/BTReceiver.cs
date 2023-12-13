@@ -71,7 +71,6 @@ public class BTReceiver : MonoBehaviour
         try
         {
             received_message = helper.Read();
-            Debug.Log(received_message);
             var split = received_message.Split('\t');
             float qw = float.Parse(split[0]);
             float qx = float.Parse(split[1]);
@@ -119,7 +118,9 @@ public class BTReceiver : MonoBehaviour
         {
             if(bluetoothHelper.isConnected())
             {
-                bluetoothHelper.SendData("1");
+                byte[] v = { 0x01 };
+                Debug.Log("sendData : " + v[0]);
+                bluetoothHelper.SendData(v);
             }
         }
     }

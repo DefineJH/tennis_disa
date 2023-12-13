@@ -22,10 +22,17 @@ public class Ball : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Hit");
+        Debug.Log("Hit object" + collision.gameObject.name);
         // 라켓에 부딪혔을 때
         if (collision.gameObject.CompareTag("Racket"))
         {
-
+            
+            var bt = collision.gameObject.GetComponentInParent<BTReceiver>();
+            if(bt != null)
+            {
+                bt.MakeVibration();
+            }
             isHitByRacket = true;
         }
 
